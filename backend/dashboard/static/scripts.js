@@ -99,6 +99,20 @@
                     { min: 7, max: 12, color: '#00cc44' }
                 ]);
             }
+            if (data.purity !== undefined) {
+                createOrUpdateGauge('purity-gauge', data.purity, 12, 0, '', [
+                    { min: 0, max: 5, color: '#ff4444' },
+                    { min: 5, max: 7, color: '#ffaa00' },
+                    { min: 7, max: 12, color: '#00cc44' }
+                ]);
+            }
+            if (data.product_pressure !== undefined) {
+                createOrUpdateGauge('product-gauge', data.product_pressure, 12, 0, '', [
+                    { min: 0, max: 5, color: '#ff4444' },
+                    { min: 5, max: 7, color: '#ffaa00' },
+                    { min: 7, max: 12, color: '#00cc44' }
+                ]);
+            }
 
             if (data.dew_point !== undefined) {
                 createOrUpdateGauge('dew-gauge', data.dew_point, 10, -100, '', [
