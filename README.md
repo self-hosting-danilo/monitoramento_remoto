@@ -1,6 +1,6 @@
-# Projeto Novo Sistema
+# Projeto Monitoramento Remoto
 
-Este projeto utiliza **Django**, **Redis** e um **client MQTT**.  
+Este projeto utiliza **Django**, **Redis**, **PostgresSQL** e um **client MQTT**.  
 Abaixo estão as instruções para configurar e rodar o sistema localmente.
 
 ---
@@ -9,15 +9,18 @@ Abaixo estão as instruções para configurar e rodar o sistema localmente.
 
 - Python 3.11+  
 - Redis (rodando em container local)  
+- Postgres (rodando em um container local)
 - Pip  
 
 ---
 
 ## 1. Preparar o ambiente
 
-1. Ativar o ambiente virtual:
+1. Criar e Ativar o ambiente virtual:
 
 ```bash
+python -m venv venv
+
 # Windows
 venv\Scripts\activate
 
@@ -33,10 +36,18 @@ pip install -r requirements.txt
 
 2. Rodar o Redis
 
-Certifique-se de que o Redis está rodando em um container local.
+Certifique-se de que o Redis e o Postgres estão rodando em um container local.
 Exemplo usando Docker:
 
 ```bash
+docker run -d \
+  --name meu_postgres \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=123456 \
+  -e POSTGRES_DB=meubanco \
+  -p 5432:5432 \
+  postgres
+
 docker run -d -p 6379:6379 --name redis redis
 ```
 
