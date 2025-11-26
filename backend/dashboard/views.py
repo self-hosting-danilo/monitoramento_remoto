@@ -88,7 +88,7 @@ def dashboard(request):
             'hospital': hospital,
             'oxygen_details': hospital_details
         }
-        return render(request, 'dashboard_oxygenerator.html', context)
+        return render(request, 'dashboard_central.html', context)
 
     context = {
         'hospital': hospital,
