@@ -35,6 +35,23 @@
 
              
                     <div class="gauge-container">
+
+                        {% if hospital_details.purity %}
+                            <div class="gauge-card">
+                                <h3><i class="fas fa-compress-alt"></i> Concentração</h3>
+                                <canvas id="purity-gauge" width="250" height="250"></canvas>
+                                <div class="gauge-label">%</div>
+                            </div>
+                        {% endif %}
+                    
+                        {% if hospital_details.product_pressure %}
+                            <div class="gauge-card">
+                                <h3><i class="fas fa-compress-alt"></i> Pressão do Produto</h3>
+                                <canvas id="product-gauge" width="250" height="250"></canvas>
+                                <div class="gauge-label">Bar</div>
+                            </div>
+                        {% endif %}
+
                         {% if hospital_details.rede %}
                         <div class="gauge-card">
                             <h3><i class="fa fa-life-ring"></i> Pressão da Rede</h3>
