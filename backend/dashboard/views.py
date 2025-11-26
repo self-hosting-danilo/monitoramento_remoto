@@ -99,10 +99,16 @@ def dashboard(request):
 @login_required
 def hospital_data(request):
     hospital = request.user.hospital
+    
+    data = r.hget("Usina", hospital.nome)
+    if data: 
+        return JsonResponse(json.loads(data)) #type: ignore
+    
     data = r.hget("Central", hospital.nome)
-    if not data:
-        return JsonResponse({'error': 'Sem dados'}, status=404)
-    return JsonResponse(json.loads(data)) #type: ignore
+    if data: 
+        return JsonResponse(json.loads(data)) #type: ignore
+        
+    return JsonResponse({'error': 'Sem dados'}, status=404)
 
 @login_required
 def oxygen_data(request):
