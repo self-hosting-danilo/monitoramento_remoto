@@ -137,12 +137,30 @@
                     { min: 8, max: 12, color: '#00cc44' }
                 ]);
             }
+            updateStatusText('c1-status', data.C1);
+            updateStatusText('c2-status', data.C2);
+
 
         } catch (error) {
            
         }
     }
 
+function updateStatusText(id, value) {
+    const el = document.querySelector(`#${id} .status-text`);
+    if (!el) return;
+
+    el.textContent = value;
+
+    // cor automática
+    if (value === "Ligado") {
+        el.style.color = "#00cc44";
+    } else if (value === "Desligado") {
+        el.style.color = "#ff4444";
+    } else {
+        el.style.color = "#666";
+    }
+}
 
     setInterval(updateData, 5000);
 
