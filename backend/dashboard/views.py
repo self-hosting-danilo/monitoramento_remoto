@@ -83,10 +83,10 @@ def dashboard(request):
 
     data = r.hget("Usina", hospital.nome)
     if data:
-        oxygen_details = json.loads(data) #type: ignore
+        hospital_details = json.loads(data) #type: ignore
         context = {
             'hospital': hospital,
-            'oxygen_details': oxygen_details
+            'oxygen_details': hospital_details
         }
         return render(request, 'dashboard_oxygenerator.html', context)
 
@@ -99,7 +99,7 @@ def dashboard(request):
 @login_required
 def hospital_data(request):
     hospital = request.user.hospital
-    
+
     data = r.hget("Usina", hospital.nome)
     if data: 
         return JsonResponse(json.loads(data)) #type: ignore
