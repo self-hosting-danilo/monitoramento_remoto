@@ -1,6 +1,6 @@
 from .utils.base_mqtt import MqttClient
 import json
-from .email_handler import HandleMail
+from .email import HandleMail
 import redis
 import threading
 import logging

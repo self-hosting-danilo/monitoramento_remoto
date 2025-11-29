@@ -86,7 +86,7 @@ def dashboard(request):
         hospital_details = json.loads(data) #type: ignore
         context = {
             'hospital': hospital,
-            'oxygen_details': hospital_details
+            'hospital_details': hospital_details
         }
         return render(request, 'dashboard_central.html', context)
 
