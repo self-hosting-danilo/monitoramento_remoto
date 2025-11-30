@@ -72,29 +72,34 @@ def admin_dashboard(request):
 def dashboard(request):
     hospital = request.user.hospital
 
-    data = r.hget("Central", hospital.nome)
-    if data:
-        hospital_details = json.loads(data) #type: ignore
-        context = {
-            'hospital': hospital,
-            'hospital_details': hospital_details
-        }
-        return render(request, 'dashboard_central.html', context)
+    if hospital.nome == 'CRADMIN':
+        return redirect('admin_dashboard')
+    
+    keys = ["Central", "Usina"]
 
-    data = r.hget("Usina", hospital.nome)
-    if data:
-        hospital_details = json.loads(data) #type: ignore
-        context = {
-            'hospital': hospital,
-            'hospital_details': hospital_details
-        }
-        return render(request, 'dashboard_central.html', context)
+    for key in keys:
+        data = r.hget(key, hospital.nome)
+        if data:
+            hospital_details = json.loads(data)  # type: ignore
+            return render(
+                request,
+                'dashboard_central.html',
+                {
+                    'hospital': hospital,
+                    'hospital_details': hospital_details
+                }
+            )
 
-    context = {
-        'hospital': hospital,
-        'error': 'Detalhes do hospital não encontrados no Redis'
-    }
-    return render(request, 'hospital_404.html', context)
+    # Se não achou em nenhuma das chaves
+    return render(
+        request,
+        'hospital_404.html',
+        {
+            'hospital': hospital.nome,
+            'error': 'Detalhes do hospital não encontrados no Redis'
+        }
+    )
+
 
 @login_required
 def hospital_data(request):
