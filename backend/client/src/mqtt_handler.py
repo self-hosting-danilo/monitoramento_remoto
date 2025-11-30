@@ -1,21 +1,25 @@
-from .utils.base_mqtt import MqttClient
 import json
-from .email import HandleMail
 import redis
 import threading
 import logging
+import paho.mqtt.client as mqtt
+from .email import HandleMail
 from .django_handler import sync_hospital
 
 logger = logging.getLogger(__name__)
 
-class MqttHandler(MqttClient):
+class MqttHandler:
     redis_host: str = ''
     redis_port: int = 6379
     redis_db: int = 0
     redis_password: str | None = None
 
     def __init__(self, broker: str, port: int, username: str, password: str, topic: str) -> None:
-        super().__init__(broker, port, username, password, topic)
+        self.broker = broker
+        self.port = port
+        self.username = username
+        self.password = password
+        self.topic = topic
         
     
     def set_redis_connection(self, host: str, port: int, db: int, password: str | None = None) -> None:
@@ -103,5 +107,13 @@ class MqttHandler(MqttClient):
             return 0
             
     def run_mqtt_client(self):
-        return super().run_mqtt_client()
+        '''Metodo que inicia o cliente mqtt'''
+        client = mqtt.Client()
+        client.on_connect = self.on_connect
+        client.on_message = self.on_message
 
+        client.username_pw_set(self.username, self.password)
+        client.tls_set()
+
+        client.connect(self.broker, self.port, 60)
+        client.loop_forever()
