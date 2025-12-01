@@ -4,6 +4,7 @@ from .email_sender import EmailSender
 import time
 from typing import Dict, Any, Tuple, Optional
 
+from .telegram import Telegram
 
 class AlertManager:
     """
@@ -197,16 +198,21 @@ class AlertManager:
         
         # Envia o alerta
         logger.info(f"Enviando alerta para {hospital_name}: {title}")
-        success = EmailSender.send(title, body)
+
+        cls._last_alert_time[hospital_name] = time.time()
         
+        success = EmailSender.send(title, body)
+        Telegram.send_message(-5043458545, body)
+
+        
+
         if success:
             # Atualiza timestamp do último alerta para este hospital
-            cls._last_alert_time[hospital_name] = time.time()
             logger.info(f"Alerta enviado com sucesso para {hospital_name}")
         else:
             logger.error(f"Falha ao enviar alerta para {hospital_name}")
         
-        return success
+        return True
     
     @classmethod
     def _should_send_alert(cls, hospital_name: str) -> bool:
