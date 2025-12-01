@@ -15,6 +15,9 @@ class AirCentral(models.Model):
 class OxygenCentral(models.Model):
     hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
 
+class ChatTelegram(models.Model):
+    hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
+    chat_id = models.CharField(verbose_name='Id chat', null=True, blank=True)
 
 class CustomUser(AbstractUser):
     hospital = models.ForeignKey(

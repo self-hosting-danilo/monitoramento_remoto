@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, AirCentral, OxygenCentral, Hospital
+from .models import CustomUser, AirCentral, OxygenCentral, Hospital, ChatTelegram
 
 class CustomUserAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
@@ -51,5 +51,18 @@ class OxygenCentralAdmin(admin.ModelAdmin):
         (
             None, 
             {'fields': ('hospital',)}
+        ),
+    ]
+
+@admin.register(ChatTelegram)
+class ChatTelegramAdmin(admin.ModelAdmin):
+    list_display = ['hospital', 'chat_id']
+    search_fields = ['hospital']
+    list_filter = ['hospital']
+
+    fieldsets = [
+        (
+            None,
+            {'fields': ('hospital', 'chat_id',)}
         ),
     ]
