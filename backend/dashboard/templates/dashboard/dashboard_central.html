@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 
     {% block title %} Dashboard MQTT - Monitoramento Hospitalar {% endblock title %}
     
@@ -116,3 +116,11 @@
         </main>
 
     {% endblock content %}    
+
+{% block extra_script %}
+    <script>
+        const HOSPITAL_DATA_URL = "{% url 'hospital_data' %}";
+    </script>
+    <script src="{% static 'js/update_data.js' %}"></script>
+    <script src="{% static 'js/create_update_gauge.js' %}"></script>
+{% endblock extra_script %}

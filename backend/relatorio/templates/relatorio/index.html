@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_style %}
+    <link rel="stylesheet" href="{% static 'css/relatorio.css' %}">
+{% endblock extra_style %}
+
+{% block content %}
+<div class="main_table">
+    <div class="container">
+        <h1>Novo Relatório</h1>
+        
+        <form method="post" enctype="multipart/form-data" id="relatorio-form">
+            {% csrf_token %}
+            
+            <div class="form-row">
+                {{ form.hospital.label_tag }}
+                {{ form.hospital }}
+            </div>
+            
+            <div class="form-row">
+                {{ form.observacao.label_tag }}
+                {{ form.observacao }}
+            </div>
+            
+            <div class="image-section">
+                <h2>Anexar Imagens</h2>
+                
+                {{ formset.management_form }}
+                
+                <!-- Template oculto para novos formulários -->
+                <div id="empty-form-template" style="display: none;">
+                    <div class="image-item">
+                        {% for hidden in formset.empty_form.hidden_fields %}
+                            {{ hidden }}
+                        {% endfor %}
+                        
+                        {{ formset.empty_form.imagem.label_tag }}
+                        {{ formset.empty_form.imagem }}
+                        
+                        <button type="button" class="remove-image-button">Remover</button>
+                        
+                        {% if formset.empty_form.errors %}
+                        <ul style="color: red; list-style-type: none; padding-left: 0;">
+                            <li>Erro no upload de imagem.</li>
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Container dos formulários existentes -->
+                <div id="formset-container">
+                    {% for form_imagem in formset %}
+                    <div class="image-item" id="form-{{ forloop.counter0 }}">
+                        {% for hidden in form_imagem.hidden_fields %}
+                        {{ hidden }}
+                        {% endfor %}
+                        
+                        {{ form_imagem.imagem.label_tag }}
+                        {{ form_imagem.imagem }}
+                        
+                        {% if form_imagem.instance.pk %}
+                        <div class="remove-option">
+                            {{ form_imagem.DELETE }}
+                            <label for="{{ form_imagem.DELETE.id_for_label }}">Manter imagem existente</label>
+                        </div>
+                        {% endif %}
+                        
+                        {% if form_imagem.errors %}
+                        <ul style="color: red; list-style-type: none; padding-left: 0;">
+                            <li>Erro no upload de imagem.</li>
+                        </ul>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <button type="button" id="add-image-button">
+                    + Adicionar Outra Imagem
+                </button>
+            </div>
+            
+            <div class="button-group">
+                <button type="submit">Salvar Relatório</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extra_script %}
+    <script src="{% static 'js/relatorio.js' %}"></script>
+{% endblock extra_script %}

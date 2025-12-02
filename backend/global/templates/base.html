@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="{% static 'css/btn.css' %}">
         <link rel="stylesheet" href="{% static 'css/responsividade.css' %}">
         <link rel="stylesheet" href="{% static 'css/table.css' %}">
+        {% block extra_style %}{% endblock extra_style %}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -36,11 +37,7 @@
             <p>&copy; 2025 OmniSistems Monitoramento</p>
         </footer>
         
-        <script>
-            const HOSPITAL_DATA_URL = "{% url 'hospital_data' %}";
-        </script>
-        <script src="{% static 'js/update_data.js' %}"></script>
-        <script src="{% static 'js/create_update_gauge.js' %}"></script>
+        
         {% block extra_script %} {% endblock extra_script %}
     </body>
 </html>
