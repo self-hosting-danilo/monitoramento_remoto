@@ -1,0 +1,73 @@
+
+/* Status Cards */
+.card {
+    background-color: var(--light);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+    transition: var(--transition);
+    border-left: 4px solid var(--primary);
+}
+
+.card:hover {
+    background-color: #e8e8e8;
+    transform: translateX(5px);
+}
+
+.card h3 {
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.card h3 i {
+    font-size: 0.9rem;
+}
+
+.status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.status-text {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--primary);
+    padding: 6px 12px;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Indicadores de Status */
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--secondary);
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.status-on .status-indicator,
+.status-ok .status-indicator {
+    background-color: var(--success);
+    box-shadow: 0 0 8px var(--success);
+}
+
+.status-off .status-indicator,
+.status-fault .status-indicator {
+    background-color: var(--danger);
+    box-shadow: 0 0 8px var(--danger);
+}
+
+.status-warning .status-indicator {
+    background-color: var(--warning);
+    box-shadow: 0 0 8px var(--warning);
+}

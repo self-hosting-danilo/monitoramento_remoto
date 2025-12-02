@@ -1,0 +1,68 @@
+/* Responsive Design */
+@media (max-width: 1200px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+    
+    .status-sidebar {
+        position: relative;
+        top: 0;
+        max-height: none;
+    }
+    
+    .gauge-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .main-info-card h2 {
+        font-size: 1.4rem;
+    }
+    
+    .hospital-details {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .gauge-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .gauge-card canvas {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    header {
+        padding: 15px;
+    }
+    
+    .main-info-card {
+        padding: 20px;
+    }
+    
+    .gauge-card {
+        padding: 20px;
+    }
+    
+    .status-sidebar {
+        padding: 15px;
+    }
+}

@@ -4,32 +4,43 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dashboard MQTT - Monitoramento Hospitalar</title>
-        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <title>{% block title %}{% endblock title %}</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/gauge_container.css' %}">
+        <link rel="stylesheet" href="{% static 'css/hospital_card.css' %}">
+        <link rel="stylesheet" href="{% static 'css/status_cards.css' %}">
+        <link rel="stylesheet" href="{% static 'css/btn.css' %}">
+        <link rel="stylesheet" href="{% static 'css/responsividade.css' %}">
+        <link rel="stylesheet" href="{% static 'css/table.css' %}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
+
     <body>
         <div class="container">
             <header>
-                <h1><i class="fas fa-hospital"></i> Dashboard de Monitoramento Hospitalar</h1>
+                <h1><i class="fas fa-hospital"></i> {% block header_title %}{% endblock header_title %}</h1>
                 <h2>Bem-vindo, {{ request.user.username }}</h2>
                 <a class="btn refresh-btn" href="{% url 'logout' %}">Sair</a>
             </header>
 
-
+            
             {% block content %}
             
             {% endblock content %}
-
-         <footer>
+        
+        </div>
+        
+        <footer>
             <p>&copy; 2025 OmniSistems Monitoramento</p>
         </footer>
         
         <script>
             const HOSPITAL_DATA_URL = "{% url 'hospital_data' %}";
         </script>
-        <script src="{% static 'scripts.js' %}"></script>
+        <script src="{% static 'js/update_data.js' %}"></script>
+        <script src="{% static 'js/create_update_gauge.js' %}"></script>
+        {% block extra_script %} {% endblock extra_script %}
     </body>
 </html>

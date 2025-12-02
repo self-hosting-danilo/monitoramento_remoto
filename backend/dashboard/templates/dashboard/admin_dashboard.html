@@ -1,26 +1,14 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dashboard MQTT - Monitoramento Hospitalar</title>
-        <link rel="stylesheet" href="{% static 'style.css' %}">
-        <link rel="stylesheet" href="{% static 'table.css' %}">
-        <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    </head>
-    <body>
-        <div class="container">
-            <header>
-                <h1><i class="fas fa-hospital"></i> Dashboard de Monitoramento Hospitalar</h1>
-                <h2>Bem-vindo, {{ request.user.username }}</h2>
-                <a class="btn refresh-btn" href="{% url 'logout' %}">Sair</a>
-            <div class="refresh-container">
-        </div>
-        </header>
-        <main>
+    {% block title %} Dashboard MQTT - Monitoramento Hospitalar {% endblock title %}
+    
+    {% block header_title %} Dashboard de Monitoramento Hospitalar {% endblock header_title %}
+
+
+    {% block content %}
+    
+       <div class="main_table">
             <table>
                 <tr>
                     <th>Hospital</th>
@@ -53,21 +41,10 @@
                 </tr>
                 {% endfor %}
             </table>
-        </main>
-    </div> 
+        </div>
+     
+{% endblock content %}  
 
-    <footer>
-        <p>&copy; 2025 OmniSistems Monitoramento</p>
-    </footer>
-    <script>
-    setInterval(function() {
-        location.reload();
-    }, 5000);
-
-    document.getElementById("refresh-btn").addEventListener("click", function() {
-        location.reload();
-    });
-</script>
-
-</body>
-</html>
+{% block extra_script %}
+    <script src="{% static 'js/reload.js' %}"></script>
+{% endblock extra_script %}

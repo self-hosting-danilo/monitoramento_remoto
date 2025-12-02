@@ -66,7 +66,7 @@ def admin_dashboard(request):
     context = {
         "hospitals": hospitals
     }
-    return render(request, "admin_dashboard.html", context)
+    return render(request, "dashboard/admin_dashboard.html", context)
 
 @login_required
 def dashboard(request):
@@ -83,7 +83,7 @@ def dashboard(request):
             hospital_details = json.loads(data)  # type: ignore
             return render(
                 request,
-                'dashboard_central.html',
+                'dashboard/dashboard_central.html',
                 {
                     'hospital': hospital,
                     'hospital_details': hospital_details
@@ -93,7 +93,7 @@ def dashboard(request):
     # Se não achou em nenhuma das chaves
     return render(
         request,
-        'hospital_404.html',
+        'dashboard/hospital_404.html',
         {
             'hospital': hospital.nome,
             'error': 'Detalhes do hospital não encontrados no Redis'
