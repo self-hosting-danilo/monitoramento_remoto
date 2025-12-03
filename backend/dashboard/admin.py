@@ -1,18 +1,7 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, AirCentral, OxygenCentral, Hospital, ChatTelegram
+from .models import AirCentral, OxygenCentral, Hospital, ChatTelegram
 
-class CustomUserAdmin(UserAdmin):
-    fieldsets = UserAdmin.fieldsets + (
-        ('Informações Adicionais', {'fields': ('hospital',)}),
-    ) #type: ignore
-    add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('username', 'password1', 'password2', 'hospital'),
-        }),
-    )
-admin.site.register(CustomUser, CustomUserAdmin)
+
 
 
 @admin.register(Hospital)

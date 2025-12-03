@@ -5,7 +5,8 @@ from django.views.static import serve
 from django.conf import settings
 
 urlpatterns = [
-    path('', include('dashboard.urls')),
+    path('', include('core.urls')),
+    path('dashboard/', include('dashboard.urls')),
     path('relatorio/', include('relatorio.urls')),
     path('admin/', admin.site.urls),
 ]

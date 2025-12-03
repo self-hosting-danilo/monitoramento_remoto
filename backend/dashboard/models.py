@@ -1,4 +1,3 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 class Hospital(models.Model):
@@ -19,7 +18,3 @@ class ChatTelegram(models.Model):
     hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
     chat_id = models.CharField(verbose_name='Id chat', null=True, blank=True)
 
-class CustomUser(AbstractUser):
-    hospital = models.ForeignKey(
-        Hospital, on_delete=models.SET_NULL, null=True, blank=True
-    )

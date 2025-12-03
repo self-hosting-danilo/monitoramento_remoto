@@ -1,10 +1,8 @@
 import redis
 import json
-from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-
 
 import os
 from dotenv import load_dotenv
@@ -14,25 +12,6 @@ load_dotenv()
 redis_host = os.getenv('REDIS_HOST', 'localhost')
 redis_password = os.getenv('REDIS_PASSWORD')
 r = redis.Redis(host=redis_host, port=6379, db=0, password=redis_password, decode_responses=True)
-
-def custom_login(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            login(request, user)
-            return redirect('admin_dashboard')
-        else:
-            return render(request, 'login.html', {'error': 'Usuário ou senha inválidos'})
-
-    return render(request, 'login.html')
-
-def custom_logout(request):
-    logout(request)
-    return redirect('login')
 
 @login_required
 def admin_dashboard(request):

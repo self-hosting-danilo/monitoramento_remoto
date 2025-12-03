@@ -16,6 +16,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 INSTALLED_APPS = [
     'jazzmin',
+    'core',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -85,7 +86,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'dashboard.CustomUser'
+AUTH_USER_MODEL = 'core.CustomUser'
 
 LANGUAGE_CODE = 'pt-br'
 
