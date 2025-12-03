@@ -22,7 +22,7 @@ class ImagensInline(admin.TabularInline):
 
 @admin.register(Relatorio)
 class RelatorioAdmin(admin.ModelAdmin):
-    list_display = ['hospital', 'observacao']
+    list_display = ['hospital', 'observacao', 'criado_em', 'usuario']
     search_fields = ['hospital']
     list_filter = ['hospital']
     inlines = [ImagensInline]
