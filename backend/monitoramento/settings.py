@@ -142,7 +142,7 @@ JAZZMIN_SETTINGS = {
     
     "topmenu_links": [
 
-        {"name": "Voltar ao Site",  "url": "admin_dashboard", "permissions": ["auth.view_user"]},
+        {"name": "Voltar ao Site",  "url": "admin_dashboard"},
     ],
 
 }
