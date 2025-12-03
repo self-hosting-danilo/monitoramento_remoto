@@ -9,7 +9,15 @@
 <div class="main_table">
     <div class="container">
         <h1>Novo Relatório</h1>
-        
+
+       {% if messages %}
+            <div id="popup-msg" class="popup">
+                {% for m in messages %}
+                <p>{{ m }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         <form method="post" enctype="multipart/form-data" id="relatorio-form">
             {% csrf_token %}
             
@@ -48,7 +56,7 @@
                     </div>
                 </div>
                 
-                <!-- Container dos formulários existentes -->
+                <!-- Container dos formulários -->
                 <div id="formset-container">
                     {% for form_imagem in formset %}
                     <div class="image-item" id="form-{{ forloop.counter0 }}">

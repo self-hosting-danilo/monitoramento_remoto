@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from .forms import RelatorioForm, ImagemFormSet
 
 def relatorio(request):
-    template_name = 'relatorio/index.html'
     
     if request.method == 'POST':
         form = RelatorioForm(request.POST)
@@ -10,18 +10,14 @@ def relatorio(request):
         
         if form.is_valid() and formset.is_valid():
             relatorio = form.save()
-            
             formset.instance = relatorio
             formset.save()
-            
-            return redirect('relatorio_sucesso')
+
+            messages.success(request, "Relatório enviado com sucesso!")
+            return redirect('relatorio')  
             
     else:
         form = RelatorioForm()
         formset = ImagemFormSet()
 
-    context = {
-        'form': form,
-        'formset': formset,
-    }
-    return render(request, template_name, context)
+    return render(request, 'relatorio/index.html', {'form': form, 'formset': formset})
