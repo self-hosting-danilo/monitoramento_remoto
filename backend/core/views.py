@@ -7,7 +7,11 @@ def custom_login(request):
         password = request.POST['password']
 
         user = authenticate(request, username=username, password=password)
-        hospital = str(request.user.hospital)
+        
+        try: 
+            hospital = str(request.user.hospital)
+        except:
+            pass
         
         if user is not None:
             login(request, user)
